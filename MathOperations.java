@@ -1,3 +1,4 @@
+import java.util.Scanner;
 
 /**
  * Write a description of class MathOperations here.
@@ -60,6 +61,11 @@ System.out.println(isvalid);
  System.out.println("OR Result: " + orResult);
  
 //que 2
-
-            }
+Scanner scan=new Scanner(System.in);
+System.out.println("enter grade");
+int grade=scan.nextInt();
+String isValid=(grade>=40)? "you have passed the test ":"you have failed the test";
+System.out.println(isValid);
 }
+}
+            
