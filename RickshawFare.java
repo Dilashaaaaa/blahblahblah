@@ -1,45 +1,67 @@
 import java.util.Scanner;
 
 public class RickshawFare {
-
     public static void main(String[] args) {
+
+        System.out.println("======================================");
+        System.out.println("  Biratnagar Rickshaw Fare Calculator ");
+        System.out.println("======================================\n");
+
+        int BASE_FARE = 50;
+        int PER_KM = 20;
+        int PER_MIN = 2;
+        double LOCAL_DISCOUNT = 0.10;
+        double NIGHT_SURCHARGE = 0.20;
+        int LONG_DISTANCE_THRESH = 10;
 
         Scanner scan = new Scanner(System.in);
 
-        System.out.print("Enter distance in (km): ");
+        System.out.print("Enter distance in km: ");
         double distance = scan.nextDouble();
 
-        System.out.print("Enter time in (minutes): ");
-        double time = scan.nextDouble();
+        System.out.print("Enter time in minutes: ");
+        int minutes = scan.nextInt();
 
-        System.out.print("Are you a local? (yes/no): ");
-        String localInput = scan.next().toLowerCase();
+        // are you local
+        System.out.print("Are you local? (yes/no): ");
+        String localStr = scan.next();
 
+        String localStatus = localStr.equalsIgnoreCase("yes")
+                ? "Local Customer"
+                : "Non-Local Customer";
+
+        System.out.println(localStatus);
+
+        // is it night
         System.out.print("Is it night time? (yes/no): ");
-        String nightInput = scan.next().toLowerCase();
+        String nightStr = scan.next();
 
-        boolean isLocal = localInput.equals("yes") ? true : false;
-        boolean isNight = nightInput.equals("yes") ? true : false;
+        String nightStatus = nightStr.equalsIgnoreCase("yes")
+                ? "Night Charge Applied"
+                : "Normal Day Fare";
 
+        System.out.println(nightStatus);
 
-        
-         int baseFare = 50;             // Rs. 50
-         int perKm = 20;                // Rs. 20 per km
-         int perMinute = 2;             // Rs. 2 per minute
-        double longDistanceDiscount = 0.10; // 10% discount for locals if > 10 km
-        double nightSurcharge = 0.20;     // 20% extra at night
+        //  Fare calculation 
+        double totalFare = BASE_FARE + (distance * PER_KM) + (minutes * PER_MIN);
 
+        // local discount
+        totalFare = (localStr.equalsIgnoreCase("yes") && distance > LONG_DISTANCE_THRESH)
+                ? totalFare * (1 - LOCAL_DISCOUNT)
+                : totalFare;
 
-        double totalFare = baseFare + (distance * perKm) + (time * perMinute);
+        // total fare
+        totalFare = nightStr.equalsIgnoreCase("yes")
+                ? totalFare * (1 + NIGHT_SURCHARGE)
+                : totalFare;
 
-        if (isLocal && distance > 10) {
-            totalFare = totalFare - (totalFare * longDistanceDiscount);
-        }
-
-        if (isNight) {
-            totalFare = totalFare + (totalFare * nightSurcharge);
-        }
-
-        System.out.println("\nFinal Fare: Rs. " + Math.round(totalFare));
+    //gives output
+        System.out.println("\n--------------------------------------");
+        System.out.println("            Final Fare ");
+        System.out.println("--------------------------------------");
+        System.out.println("Total Fare: Rs. " + totalFare);
+        System.out.println("--------------------------------------");
+        System.out.println(" Thank you for choosing Biratnagar Rickshaw Service!");
+        System.out.println("======================================");
     }
 }
