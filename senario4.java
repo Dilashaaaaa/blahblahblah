@@ -10,10 +10,10 @@ public class senario4 {
         double finalPrice;
 
         System.out.println("Enter age group (child / adult / senior): ");
-        String ageGroup = scan.nextLine().toLowerCase();
+        String ageGroup = scan.nextLine();
 
         System.out.println("Enter movie language (nepali / hindi / english): ");
-        String language = scan.nextLine().toLowerCase();
+        String language = scan.nextLine();
 
         System.out.println("Are you a student? (yes/no): ");
         String isStudent = scan.nextLine();
